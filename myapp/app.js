@@ -4,11 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var markAjax = require('./ajax/mark');
 var currentAjax = require('./ajax/current');
+var markAjax = require('./ajax/mark');
 
 var app = express();
 
@@ -26,10 +24,8 @@ app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/mark', markAjax);
 app.use('/current', currentAjax);
-
+app.use('/mark', markAjax);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
