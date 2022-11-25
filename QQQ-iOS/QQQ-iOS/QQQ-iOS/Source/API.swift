@@ -31,22 +31,21 @@ struct API {
 
 			let current = try decoder.decode(API.Response.Current.self, from: data)
 
-
 			return current
 		}
 	}
 
 	struct Response {
-		/// {"lessonName":"Compuhter science","from":"2022-12-29T05:00:00.000Z","to":"2022-12-29T06:50:00.000Z","url":"https://yandex.ru"}
+		/// {"lessonName":"Compuhter science","professorName":"Иванов И. О.","from":"2022-12-29T05:00:00.000Z","to":"2022-12-29T06:50:00.000Z","url":"https://yandex.ru"}
 		struct Current: Codable {
 			static var testData = """
 			{"lessonName":"Compuhter science","from":"2022-12-29T05:00:00.000Z","to":"2022-12-29T06:50:00.000Z","url":"https://yandex.ru"}
 			"""
-
 			var lessonName: String?
 			var from: Date?
 			var to: Date?
 			var url: String?
+			var professorName: String?
 		}
 	}
 

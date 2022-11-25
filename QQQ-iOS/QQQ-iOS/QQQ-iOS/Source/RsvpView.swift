@@ -22,7 +22,7 @@ struct RsvpView: View {
 	@State private var lessonName = "Computer Science 101"
 	@State private var start = ISO8601DateFormatter().date(from: "2022-11-27T15:00:00+03:00")
 	@State private var end = ISO8601DateFormatter().date(from: "2022-11-27T16:30:00+03:00")
-	@State private var proffessorName = "Читающий Нам Лекторович"
+	@State private var professorName = "Читающий Нам Лекторович"
 	@State private var onlineUrl: URL? = URL(string: "https://google.com")
 
 	@State var response = ""
@@ -62,7 +62,7 @@ struct RsvpView: View {
 				self.start = current.from
 				self.end = current.to
 				self.onlineUrl = URL(string: current.url ?? "")
-
+				self.professorName = current.professorName ?? ""
 			} catch {
 				self.response = error.localizedDescription
 			}
@@ -94,7 +94,7 @@ struct RsvpView: View {
 			Text(makeTimeTitleString()).font(.subheadline)
 			Text("")
 			Text("Преподаватель")
-			Text(proffessorName).font(.title2)
+			Text(professorName).font(.title2)
 			Text("")
 			Text("Где проходит").font(.title2)
 			makeOnlineLint()
