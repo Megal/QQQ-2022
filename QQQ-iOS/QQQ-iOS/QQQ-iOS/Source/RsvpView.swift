@@ -18,9 +18,11 @@ struct RsvpView: View {
 		shadowOpacity: 0.15
 	)
 	@State private var opacity = 0.35
-	var start = ISO8601DateFormatter().date(from: "2022-11-27T15:00+3:00")
-	var end = ISO8601DateFormatter().date(from: "2022-11-27T16:30+3:00")
+	var start = ISO8601DateFormatter().date(from: "2022-11-27T15:00:00+03:00")
+	var end = ISO8601DateFormatter().date(from: "2022-11-27T16:30:00+03:00")
 	var proffessorName = "Читающий Нам Лекторович"
+
+	@State var response = ""
 
 	private func makePrismView() -> some View {
 		let color = Color.accentColor
@@ -48,6 +50,18 @@ struct RsvpView: View {
 		withAnimation {
 			prismConfiguration.extrusion = 20.0 - prismConfiguration.extrusion
 		}
+
+		let config = SessionConfiguration.default
+		let request = URL(string: "http://\(config.ip):\(config.port)")!
+		let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+			if let error = error {
+				self.response = error.localizedDescription
+			} else if let data = data {
+				self.response = String(data: data, encoding: .utf8) ?? ""
+			}
+
+		}
+		task.resume()
 	}
 
 	private func makeTimeTitleString() -> String {
@@ -80,6 +94,10 @@ struct RsvpView: View {
 		}
 	}
 
+	private func makeResonse() -> some View {
+		Text(response)
+	}
+
 	var body: some View {
 		return VStack {
 			Spacer()
@@ -87,6 +105,7 @@ struct RsvpView: View {
 			Spacer()
 			makePrismView()
 			Spacer()
+			makeResonse()
 		}
 	}
 }

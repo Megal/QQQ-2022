@@ -8,21 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		247CA6872930DFFD007EA028 /* QQQ_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CA6862930DFFD007EA028 /* QQQ_iOSApp.swift */; };
-		247CA6892930DFFD007EA028 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CA6882930DFFD007EA028 /* ContentView.swift */; };
 		247CA68B2930DFFE007EA028 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 247CA68A2930DFFE007EA028 /* Assets.xcassets */; };
 		247CA68E2930DFFE007EA028 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 247CA68D2930DFFE007EA028 /* Preview Assets.xcassets */; };
 		247CA69729311056007EA028 /* RsvpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CA69629311056007EA028 /* RsvpView.swift */; };
 		24E26E092931130A004A2B17 /* Prism in Frameworks */ = {isa = PBXBuildFile; productRef = 24E26E082931130A004A2B17 /* Prism */; };
+		24E26E0B29312260004A2B17 /* InvolmentTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E26E0A29312260004A2B17 /* InvolmentTestView.swift */; };
+		24E26E0D29312270004A2B17 /* SessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E26E0C29312270004A2B17 /* SessionConfiguration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		247CA6832930DFFD007EA028 /* QQQ-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QQQ-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		247CA6862930DFFD007EA028 /* QQQ_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QQQ_iOSApp.swift; sourceTree = "<group>"; };
-		247CA6882930DFFD007EA028 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		247CA68A2930DFFE007EA028 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		247CA68D2930DFFE007EA028 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		247CA69629311056007EA028 /* RsvpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RsvpView.swift; sourceTree = "<group>"; };
 		247CA69929311175007EA028 /* Prism */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Prism; path = ../../../Prism; sourceTree = "<group>"; };
+		24E26E0A29312260004A2B17 /* InvolmentTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvolmentTestView.swift; sourceTree = "<group>"; };
+		24E26E0C29312270004A2B17 /* SessionConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionConfiguration.swift; sourceTree = "<group>"; };
+		24E26E0E293125E4004A2B17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,7 @@
 		247CA6852930DFFD007EA028 /* QQQ-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				24E26E0E293125E4004A2B17 /* Info.plist */,
 				247CA6952930E039007EA028 /* Source */,
 				247CA68A2930DFFE007EA028 /* Assets.xcassets */,
 				247CA68C2930DFFE007EA028 /* Preview Content */,
@@ -78,7 +82,8 @@
 			children = (
 				247CA6862930DFFD007EA028 /* QQQ_iOSApp.swift */,
 				247CA69629311056007EA028 /* RsvpView.swift */,
-				247CA6882930DFFD007EA028 /* ContentView.swift */,
+				24E26E0A29312260004A2B17 /* InvolmentTestView.swift */,
+				24E26E0C29312270004A2B17 /* SessionConfiguration.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -171,9 +176,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				247CA6892930DFFD007EA028 /* ContentView.swift in Sources */,
+				24E26E0B29312260004A2B17 /* InvolmentTestView.swift in Sources */,
 				247CA6872930DFFD007EA028 /* QQQ_iOSApp.swift in Sources */,
 				247CA69729311056007EA028 /* RsvpView.swift in Sources */,
+				24E26E0D29312270004A2B17 /* SessionConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +311,7 @@
 				DEVELOPMENT_TEAM = PX6H7JE9C9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "QQQ-iOS/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -335,6 +342,7 @@
 				DEVELOPMENT_TEAM = PX6H7JE9C9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "QQQ-iOS/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
