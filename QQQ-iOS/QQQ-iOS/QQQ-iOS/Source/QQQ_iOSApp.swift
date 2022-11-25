@@ -9,9 +9,9 @@ import SwiftUI
 
 @main
 struct QQQ_iOSApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
+	var body: some Scene {
+		WindowGroup {
+			RsvpView()
+		}
+	}
 }
