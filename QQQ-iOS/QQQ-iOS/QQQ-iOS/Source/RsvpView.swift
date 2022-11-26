@@ -8,6 +8,53 @@
 import SwiftUI
 import Prism
 
+struct RsvpViewModel {
+	enum State: String {
+		case firstLoad
+		case failedToLoad
+		case loaded
+		case waitingForResponse
+
+		var descriptuion: String {
+			"\(self)"
+		}
+	}
+
+	var state = State.firstLoad
+	var lessonName = "Computer Science 101"
+	var start = ISO8601DateFormatter().date(from: "2022-11-27T15:00:00+03:00")
+	var end = ISO8601DateFormatter().date(from: "2022-11-27T16:30:00+03:00")
+	var professorName = "Читающий Нам Лекторович"
+	var onlineUrl: URL? = URL(string: "https://google.com")
+	var response = ""
+
+	mutating func load() {
+
+	}
+
+	mutating func participate() async {
+		self.state = .waitingForResponse
+		self.response = ""
+
+		do {
+			let current = try await API.Request.current()
+
+			self.lessonName = current.lessonName ?? "Лекция"
+			self.start = current.from
+			self.end = current.to
+			self.onlineUrl = URL(string: current.url ?? "")
+			self.professorName = current.professorName ?? ""
+
+			self.state = .loaded
+		} catch {
+			self.response = error.localizedDescription
+
+			self.state = .failedToLoad
+		}
+	}
+
+}
+
 struct RsvpView: View {
 	@State var prismConfiguration = PrismConfiguration(
 		tilt: 0.5,
@@ -18,14 +65,7 @@ struct RsvpView: View {
 		shadowOpacity: 0.15
 	)
 	@State private var opacity = 0.35
-
-	@State private var lessonName = "Computer Science 101"
-	@State private var start = ISO8601DateFormatter().date(from: "2022-11-27T15:00:00+03:00")
-	@State private var end = ISO8601DateFormatter().date(from: "2022-11-27T16:30:00+03:00")
-	@State private var professorName = "Читающий Нам Лекторович"
-	@State private var onlineUrl: URL? = URL(string: "https://google.com")
-
-	@State var response = ""
+	@State private var vm = RsvpViewModel()
 
 	private func makePrismView() -> some View {
 		let color = Color.accentColor
@@ -54,18 +94,8 @@ struct RsvpView: View {
 			prismConfiguration.extrusion = 20.0 - prismConfiguration.extrusion
 		}
 
-		self.response = ""
 		Task {
-			do {
-				let current = try await API.Request.current()
-				self.lessonName = current.lessonName ?? "Лекция"
-				self.start = current.from
-				self.end = current.to
-				self.onlineUrl = URL(string: current.url ?? "")
-				self.professorName = current.professorName ?? ""
-			} catch {
-				self.response = error.localizedDescription
-			}
+			await vm.participate()
 		}
 	}
 
@@ -74,14 +104,14 @@ struct RsvpView: View {
 		dt.dateStyle = .none
 		dt.timeStyle = .short
 
-		let start = dt.string(from: self.start ?? .now)
-		let end = dt.string(from: self.end ?? .now)
+		let start = dt.string(from: self.vm.start ?? .now)
+		let end = dt.string(from: self.vm.end ?? .now)
 
 		return "\(start) - \(end)"
 	}
 
 	private func makeOnlineLint() -> AnyView {
-		if let onlineUrl = onlineUrl {
+		if let onlineUrl = vm.onlineUrl {
 			return AnyView(erasing: Link("Онлайн", destination: onlineUrl))
 		} else {
 			return AnyView(erasing: Text("Аудитория"))
@@ -90,11 +120,12 @@ struct RsvpView: View {
 
 	private func makeInfoSection() -> some View {
 		return VStack {
-			Text(lessonName).font(.title)
+			Text("State: \(vm.state.rawValue)\n").font(.headline).foregroundColor(.gray)
+			Text(vm.lessonName).font(.title)
 			Text(makeTimeTitleString()).font(.subheadline)
 			Text("")
 			Text("Преподаватель")
-			Text(professorName).font(.title2)
+			Text(vm.professorName).font(.title2)
 			Text("")
 			Text("Где проходит").font(.title2)
 			makeOnlineLint()
@@ -102,7 +133,7 @@ struct RsvpView: View {
 	}
 
 	private func makeResonse() -> some View {
-		Text(response)
+		Text(vm.response)
 	}
 
 	var body: some View {

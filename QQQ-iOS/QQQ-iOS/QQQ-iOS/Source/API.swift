@@ -20,6 +20,7 @@ struct API {
 		static func current() async throws -> API.Response.Current {
 			let config = SessionConfiguration.default
 			let requestUrl = URL(string: "http://\(config.ip):\(config.port)/current")!
+
 			let (data, _) = try await session.data(from: requestUrl)
 
 			let decoder = JSONDecoder()
@@ -33,6 +34,22 @@ struct API {
 
 			return current
 		}
+
+		static func participate() async throws -> Bool {
+			let config = SessionConfiguration.default
+			let requestUrl = URL(string: "http://\(config.ip):\(config.port)/participate")!
+
+			let (_, response) = try await session.data(from: requestUrl)
+			print("\(response)")
+
+			if let httpResponse = response as? HTTPURLResponse {
+				return (200..<400 ~= httpResponse.statusCode)
+			}
+
+			return false
+		}
+
+
 	}
 
 	struct Response {
