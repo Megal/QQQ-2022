@@ -89,11 +89,9 @@ struct RsvpView: View {
 		} left: {
 			color.brightness(-0.1)
 				.opacity(opacity - 0.1)
-//					.background(.thinMaterial)
 		} right: {
 			color.brightness(-0.3)
 				.opacity(opacity)
-//					.background(.thinMaterial)
 		}
 		.onTapGesture(perform: reactRsvpButton)
 	}
@@ -120,7 +118,7 @@ struct RsvpView: View {
 		return "\(start) - \(end)"
 	}
 
-	private func makeOnlineLint() -> AnyView {
+	private func makeOnlineLink() -> AnyView {
 		if let onlineUrl = vm.onlineUrl {
 			return AnyView(erasing: Link("Онлайн", destination: onlineUrl))
 		} else {
@@ -137,7 +135,7 @@ struct RsvpView: View {
 			Text(vm.professorName).font(.title2)
 			Text("")
 			Text("Где проходит").font(.title2)
-			makeOnlineLint()
+			makeOnlineLink()
 		}
 	}
 

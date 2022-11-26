@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2447FAAE293227FC00F36441 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2447FAAD293227FB00F36441 /* LoginView.swift */; };
+		2447FAB02932648100F36441 /* ProfessorLessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2447FAAF2932648100F36441 /* ProfessorLessonView.swift */; };
 		247CA6872930DFFD007EA028 /* QQQ_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CA6862930DFFD007EA028 /* QQQ_iOSApp.swift */; };
 		247CA68B2930DFFE007EA028 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 247CA68A2930DFFE007EA028 /* Assets.xcassets */; };
 		247CA68E2930DFFE007EA028 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 247CA68D2930DFFE007EA028 /* Preview Assets.xcassets */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		2447FAAD293227FB00F36441 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		2447FAAF2932648100F36441 /* ProfessorLessonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorLessonView.swift; sourceTree = "<group>"; };
 		247CA6832930DFFD007EA028 /* QQQ-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QQQ-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		247CA6862930DFFD007EA028 /* QQQ_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QQQ_iOSApp.swift; sourceTree = "<group>"; };
 		247CA68A2930DFFE007EA028 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			children = (
 				247CA6862930DFFD007EA028 /* QQQ_iOSApp.swift */,
 				247CA69629311056007EA028 /* RsvpView.swift */,
+				2447FAAF2932648100F36441 /* ProfessorLessonView.swift */,
 				2447FAAD293227FB00F36441 /* LoginView.swift */,
 				24E26E0A29312260004A2B17 /* InvolmentTestView.swift */,
 				24E26E0C29312270004A2B17 /* SessionConfiguration.swift */,
@@ -187,6 +190,7 @@
 				247CA6872930DFFD007EA028 /* QQQ_iOSApp.swift in Sources */,
 				247CA69729311056007EA028 /* RsvpView.swift in Sources */,
 				24E26E0D29312270004A2B17 /* SessionConfiguration.swift in Sources */,
+				2447FAB02932648100F36441 /* ProfessorLessonView.swift in Sources */,
 				24E26E1029312C9C004A2B17 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
