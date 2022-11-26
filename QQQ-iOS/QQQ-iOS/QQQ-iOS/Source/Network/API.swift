@@ -14,12 +14,7 @@ struct API {
 
 	struct Request {
 		static var session = URLSession.shared
-		static private var iso8601DateFormatter: DateFormatter = {
-			let dt = DateFormatter()
-			dt.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
-
-			return dt
-		}()
+		static var mockEverything = true
 
 		static private func makeRequestUrl(to endpoint: String) -> URL? {
 			let config = SessionConfiguration.default
@@ -31,21 +26,25 @@ struct API {
 		static func current() async throws -> API.Response.Current {
 			let requestUrl = makeRequestUrl(to: "current")!
 
-			let (data, _) = try await session.data(from: requestUrl)
+			let data: Data
+			if mockEverything {
+				data = await MockWaiter.task(with: Response.Current.testData)
+			} else {
+				(data, _) = try await session.data(from: requestUrl)
+			}
 
-			let decoder = JSONDecoder()
-			decoder.dateDecodingStrategy = .formatted(iso8601DateFormatter)
-
-//			let testData = API.Response.Current.testData
-//			let testCurrent = try decoder.decode(API.Response.Current.self, from: testData.data(using: .utf8)!)
-//			print("\(testCurrent)")
-
-			let current = try decoder.decode(API.Response.Current.self, from: data)
-
-			return current
+			return try Decoder.current(from: data)
 		}
 
 		static func participate() async throws {
+			guard !mockEverything else {
+				if #available(iOS 16.0, *) {
+					try await Task.sleep(for: .seconds(MockWaiter.defaultDelaySeconds))
+				}
+
+				return
+			}
+
 			let requestUrl = makeRequestUrl(to: "participate")!
 
 			let (_, response) = try await session.data(from: requestUrl)
@@ -60,6 +59,26 @@ struct API {
 			let requestUrl = makeRequestUrl(to: "getQuestions")!
 
 			let (data, _) = try await session.data(from: requestUrl)
+			return try Decoder.getQuestions(from: data)
+		}
+	}
+
+	struct Decoder {
+		static private var iso8601DateFormatter: DateFormatter = {
+			let dt = DateFormatter()
+			dt.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+
+			return dt
+		}()
+
+		static func current(from data: Data) throws -> Response.Current {
+			let decoder = JSONDecoder()
+			decoder.dateDecodingStrategy = .formatted(iso8601DateFormatter)
+			let current = try decoder.decode(API.Response.Current.self, from: data)
+			return current
+		}
+
+		static func getQuestions(from data: Data) throws -> [Response.Question] {
 			let decoder = JSONDecoder()
 
 			let questions = try decoder.decode([API.Response.Question].self, from: data)
@@ -83,6 +102,10 @@ struct API {
 
 		/// [{"question":"Корень кубический из 49","answers":["7","5","14"],"correctAnswer":1},{"question":"Стоимость 98 сегодня","answers":["42","54","71"],"correctAnswer":2}]
 		struct Question: Codable {
+			static var mock = """
+			[{"question":"Корень кубический из 49","answers":["7","5","14"],"correctAnswer":1},{"question":"Стоимость 98 сегодня","answers":["42","54","71"],"correctAnswer":2}]
+			"""
+
 			var question: String?
 			var answers: [String]?
 			var correctAnswer: Int?
