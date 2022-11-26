@@ -14,16 +14,22 @@ struct API {
 
 	struct Request {
 		static var session = URLSession.shared
-		static var iso8601DateFormatter: DateFormatter = {
+		static private var iso8601DateFormatter: DateFormatter = {
 			let dt = DateFormatter()
 			dt.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
 
 			return dt
 		}()
 
-		static func current() async throws -> API.Response.Current {
+		static private func makeRequestUrl(to endpoint: String) -> URL? {
 			let config = SessionConfiguration.default
-			let requestUrl = URL(string: "http://\(config.ip):\(config.port)/current")!
+			let requestUrl = URL(string: "http://\(config.ip):\(config.port)/\(endpoint)")
+
+			return requestUrl
+		}
+
+		static func current() async throws -> API.Response.Current {
+			let requestUrl = makeRequestUrl(to: "current")!
 
 			let (data, _) = try await session.data(from: requestUrl)
 
@@ -40,8 +46,7 @@ struct API {
 		}
 
 		static func participate() async throws {
-			let config = SessionConfiguration.default
-			let requestUrl = URL(string: "http://\(config.ip):\(config.port)/participate")!
+			let requestUrl = makeRequestUrl(to: "participate")!
 
 			let (_, response) = try await session.data(from: requestUrl)
 			print("\(response)")
@@ -51,6 +56,15 @@ struct API {
 			}
 		}
 
+		static func getQuestions() async throws -> [API.Response.Question] {
+			let requestUrl = makeRequestUrl(to: "getQuestions")!
+
+			let (data, _) = try await session.data(from: requestUrl)
+			let decoder = JSONDecoder()
+
+			let questions = try decoder.decode([API.Response.Question].self, from: data)
+			return questions
+		}
 
 	}
 
@@ -65,6 +79,13 @@ struct API {
 			var to: Date?
 			var url: String?
 			var professorName: String?
+		}
+
+		/// [{"question":"Корень кубический из 49","answers":["7","5","14"],"correctAnswer":1},{"question":"Стоимость 98 сегодня","answers":["42","54","71"],"correctAnswer":2}]
+		struct Question: Codable {
+			var question: String?
+			var answers: [String]?
+			var correctAnswer: Int?
 		}
 	}
 
