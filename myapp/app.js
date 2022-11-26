@@ -4,9 +4,28 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var mysql      = require('mysql8');
+global.connDB = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'user',
+  password : '0000',
+  database : 'cyberGardenDB'
+});
+
+
+global.connDB.connect(function(err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+
+  console.log('connected as id ' + global.connDB.threadId);
+});
+
 var indexRouter = require('./routes/index');
 var currentAjax = require('./ajax/current');
 var markAjax = require('./ajax/mark');
+var getQuestionsAjax = require('./ajax/getQuestions')
 
 var app = express();
 
@@ -26,6 +45,7 @@ app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'));
 app.use('/', indexRouter);
 app.use('/current', currentAjax);
 app.use('/mark', markAjax);
+app.use('/getQuestions', getQuestionsAjax);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
