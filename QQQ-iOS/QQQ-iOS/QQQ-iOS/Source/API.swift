@@ -8,6 +8,10 @@
 import Foundation
 
 struct API {
+	enum ApiError: Error {
+		case unsuccessful
+	}
+
 	struct Request {
 		static var session = URLSession.shared
 		static var iso8601DateFormatter: DateFormatter = {
@@ -35,18 +39,16 @@ struct API {
 			return current
 		}
 
-		static func participate() async throws -> Bool {
+		static func participate() async throws {
 			let config = SessionConfiguration.default
 			let requestUrl = URL(string: "http://\(config.ip):\(config.port)/participate")!
 
 			let (_, response) = try await session.data(from: requestUrl)
 			print("\(response)")
 
-			if let httpResponse = response as? HTTPURLResponse {
-				return (200..<400 ~= httpResponse.statusCode)
+			guard let httpResponse = response as? HTTPURLResponse, 200..<400 ~= httpResponse.statusCode else {
+				throw ApiError.unsuccessful
 			}
-
-			return false
 		}
 
 

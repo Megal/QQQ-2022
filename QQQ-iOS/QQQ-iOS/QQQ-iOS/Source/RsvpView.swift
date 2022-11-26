@@ -28,11 +28,7 @@ struct RsvpViewModel {
 	var onlineUrl: URL? = URL(string: "https://google.com")
 	var response = ""
 
-	mutating func load() {
-
-	}
-
-	mutating func participate() async {
+	mutating func load() async {
 		self.state = .waitingForResponse
 		self.response = ""
 
@@ -49,6 +45,19 @@ struct RsvpViewModel {
 		} catch {
 			self.response = error.localizedDescription
 
+			self.state = .failedToLoad
+		}
+	}
+
+	mutating func participate() async {
+		self.response = ""
+		self.state = .waitingForResponse
+
+		do {
+			try await API.Request.participate()
+			self.state = .loaded
+		} catch {
+			self.response = error.localizedDescription
 			self.state = .failedToLoad
 		}
 	}
@@ -91,11 +100,12 @@ struct RsvpView: View {
 
 	private func reactRsvpButton() {
 		withAnimation {
-			prismConfiguration.extrusion = 20.0 - prismConfiguration.extrusion
+			prismConfiguration.extrusion = 0.0
 		}
 
 		Task {
 			await vm.participate()
+			prismConfiguration.extrusion = 20.0
 		}
 	}
 
@@ -120,7 +130,6 @@ struct RsvpView: View {
 
 	private func makeInfoSection() -> some View {
 		return VStack {
-			Text("State: \(vm.state.rawValue)\n").font(.headline).foregroundColor(.gray)
 			Text(vm.lessonName).font(.title)
 			Text(makeTimeTitleString()).font(.subheadline)
 			Text("")
@@ -132,22 +141,62 @@ struct RsvpView: View {
 		}
 	}
 
+	private func makeStatusLabel() -> some View {
+		Text("State: \(vm.state.rawValue)\n").font(.headline).foregroundColor(.gray)
+
+	}
+
 	private func makeResonse() -> some View {
 		Text(vm.response)
 	}
 
-	var body: some View {
-		return VStack {
-			Spacer()
-			makeInfoSection()
-			Spacer()
-			makePrismView()
-			Spacer()
+	private func makeLoadingView() -> some View {
+		VStack {
+			makeStatusLabel()
+			Text("Загружаем данные\nПожалуйста подождите")
+			ProgressView()
+		}
+	}
+
+	private func makeFailedView() -> some View {
+		VStack {
+			makeStatusLabel()
+			Text("Произошла ошибка")
+			Button("Обновить") {
+				Task { await vm.load() }
+			}
 			ScrollView {
 				makeResonse()
 			}
-			.frame(maxHeight: 200.0)
+		}
+	}
+
+	private func makeLoadedView() -> some View {
+		VStack {
 			Spacer()
+			makeStatusLabel()
+			makeInfoSection()
+			Spacer()
+			if vm.state == .loaded {
+				makePrismView()
+			} else {
+				ProgressView()
+			}
+			Spacer()
+		}
+	}
+
+	var body: some View {
+		switch vm.state {
+		case .firstLoad:
+			makeLoadingView()
+				.onAppear { Task { await vm.load() } }
+		case .loaded:
+			makeLoadedView()
+		case .failedToLoad:
+			makeFailedView()
+		case .waitingForResponse:
+			makeLoadingView()
 		}
 	}
 }
