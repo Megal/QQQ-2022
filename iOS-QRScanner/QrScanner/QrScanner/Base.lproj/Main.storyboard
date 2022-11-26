@@ -18,6 +18,14 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.1064393148" green="0.46032363180000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="barTintColor" red="0.1064393148" green="0.46032363180000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="0.9533110119" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textShadowColor" white="0.9533110119" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="0.9533110119" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textShadowColor" white="0.9533110119" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="fcc-um-41r" kind="relationship" relationship="rootViewController" id="4dW-46-Zkj"/>
@@ -36,19 +44,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1A-j4-X6U">
-                                <rect key="frame" x="16" y="323.5" width="382" height="48"/>
+                                <rect key="frame" x="16" y="750" width="382" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="Vai-Ld-7ud"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Сканировать QR">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="buttonTapped:" destination="fcc-um-41r" eventType="touchUpInside" id="8PI-zh-Yeg"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Host" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5j6-pJ-5yL">
                                 <rect key="frame" x="16" y="157" width="382" height="38.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.95331101190476186" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -68,15 +78,14 @@
                             <constraint firstItem="qdM-kQ-7Fp" firstAttribute="leading" secondItem="dkd-Fj-3rM" secondAttribute="leading" constant="16" id="FvI-0q-lsb"/>
                             <constraint firstItem="Q1A-j4-X6U" firstAttribute="leading" secondItem="dkd-Fj-3rM" secondAttribute="leading" constant="16" id="aSt-YG-jjP"/>
                             <constraint firstItem="dkd-Fj-3rM" firstAttribute="trailing" secondItem="qdM-kQ-7Fp" secondAttribute="trailing" constant="16" id="jEF-ws-fO5"/>
+                            <constraint firstItem="dkd-Fj-3rM" firstAttribute="bottom" secondItem="Q1A-j4-X6U" secondAttribute="bottom" constant="64" id="k5n-JT-z0x"/>
                             <constraint firstItem="5j6-pJ-5yL" firstAttribute="leading" secondItem="dkd-Fj-3rM" secondAttribute="leading" constant="16" id="o9P-UW-bwi"/>
                             <constraint firstItem="dkd-Fj-3rM" firstAttribute="trailing" secondItem="Q1A-j4-X6U" secondAttribute="trailing" constant="16" id="oPa-gx-lda"/>
-                            <constraint firstItem="Q1A-j4-X6U" firstAttribute="top" secondItem="5j6-pJ-5yL" secondAttribute="bottom" constant="128" id="qGh-SY-572"/>
                             <constraint firstItem="qdM-kQ-7Fp" firstAttribute="top" secondItem="dkd-Fj-3rM" secondAttribute="top" constant="32" id="uAv-FH-BgO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Настроить Сервер" id="rbT-N5-DnU"/>
                     <connections>
-                        <outlet property="hostLabel" destination="qdM-kQ-7Fp" id="MSS-y6-WbC"/>
                         <outlet property="hostTextField" destination="5j6-pJ-5yL" id="oyw-wW-Rzu"/>
                     </connections>
                 </viewController>
