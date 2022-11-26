@@ -25,7 +25,9 @@ global.connDB.connect(function(err) {
 var indexRouter = require('./routes/index');
 var currentAjax = require('./ajax/current');
 var markAjax = require('./ajax/mark');
-var getQuestionsAjax = require('./ajax/getQuestions')
+var getQuestionsAjax = require('./ajax/getQuestions');
+var participateAjax = require('./ajax/participate');
+var getAnswerAjax = require('./ajax/getAnswer');
 
 var app = express();
 
@@ -46,6 +48,8 @@ app.use('/', indexRouter);
 app.use('/current', currentAjax);
 app.use('/mark', markAjax);
 app.use('/getQuestions', getQuestionsAjax);
+app.use('/participate', participateAjax);
+app.use('/getAnswer', getAnswerAjax);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
