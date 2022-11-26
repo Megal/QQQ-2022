@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+global.currTime = '2022-11-27 16:00:00';
+
 var mysql      = require('mysql8');
 global.connDB = mysql.createConnection({
   host     : 'localhost',
@@ -31,6 +33,8 @@ var getQuestionsAjax = require('./ajax/getQuestions');
 var participateAjax = require('./ajax/participate');
 var setAnswerAjax = require('./ajax/setAnswer');
 
+var generateQRCodeFunction = require('./logic/generateQR');
+
 var app = express();
 
 // view engine setup
@@ -53,6 +57,9 @@ app.use('/mark', markAjax);
 app.use('/getQuestions', getQuestionsAjax);
 app.use('/participate', participateAjax);
 app.use('/setAnswer', setAnswerAjax);
+
+global.qrArray = new Map();
+setInterval(generateQRCodeFunction.func, 10000);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
