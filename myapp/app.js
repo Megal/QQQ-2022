@@ -59,7 +59,8 @@ app.use('/participate', participateAjax);
 app.use('/setAnswer', setAnswerAjax);
 
 global.qrArray = new Map();
-setInterval(generateQRCodeFunction.func, 10000);
+generateQRCodeFunction.func();
+setInterval(generateQRCodeFunction.func, 15000);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

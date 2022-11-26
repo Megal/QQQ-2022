@@ -18,8 +18,19 @@ router.get('/', jsonParser, function(req, res, next) {
         `WHERE Lesson.TimeStart <= \'${global.currTime}\' and \'${global.currTime}\' <= Lesson.TimeEnd;`,
         function (error, results, fields) {
             if (error) throw error;
-            if(results[0] !== undefined)
+            if(results[0] !== undefined) {
+                let qrCode;
+
+                global.qrArray.forEach((who, qr) => {
+                    if(who['studentID'] == req.body['id']) {
+                        qrCode = qr;
+                        return true
+                    }
+                });
+
+                results[0]['qrCode'] = qrCode;
                 res.json(results[0]);
+            }
             else
                 res.json('no lesson');
         });

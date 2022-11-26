@@ -6,8 +6,11 @@ var jsonParser = express.json();
 router.post('/', jsonParser, function(req, res, next) {
     if(req.body['qrCode'] !== undefined)
     {
-        if(global.qrArray.has(req.body['qrCode']))
+        console.log(req.body['qrCode']);
+        if(global.qrArray.has(req.body['qrCode'])) {
+
             res.json('ok');
+        }
         else
             res.json('err');
     }

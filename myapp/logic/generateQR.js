@@ -22,5 +22,7 @@ exports.func = function generateQRCodes ()
 
             global.qrArray.set(newStr, {lessonID: lesson['LessonID'], studentID: lesson['StudentID']});
         });
+
+        console.log(global.qrArray);
     });
 }
