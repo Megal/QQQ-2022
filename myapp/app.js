@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 global.currTime = '2022-11-27 16:00:00';
+let qrCodeTimeOut = 15000;
 
 var mysql      = require('mysql8');
 global.connDB = mysql.createConnection({
@@ -60,7 +61,7 @@ app.use('/setAnswer', setAnswerAjax);
 
 global.qrArray = new Map();
 generateQRCodeFunction.func();
-setInterval(generateQRCodeFunction.func, 15000);
+setInterval(generateQRCodeFunction.func, qrCodeTimeOut);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
