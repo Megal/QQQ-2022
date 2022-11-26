@@ -10,7 +10,7 @@ import Foundation
 struct API {
 	struct Request {
 		static var session = URLSession.shared
-		static var iso8601DateFormatter = {
+		static var iso8601DateFormatter: DateFormatter = {
 			let dt = DateFormatter()
 			dt.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
 
