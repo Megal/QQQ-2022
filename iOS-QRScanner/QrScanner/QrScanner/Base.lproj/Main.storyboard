@@ -1,24 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="s0B-77-o9Y">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="O8v-Le-PgD">
+            <objects>
+                <navigationController id="s0B-77-o9Y" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3Nf-Sw-eRc">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.1064393148" green="0.46032363180000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" red="0.1064393148" green="0.46032363180000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="0.9533110119" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textShadowColor" white="0.9533110119" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="0.9533110119" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textShadowColor" white="0.9533110119" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="fcc-um-41r" kind="relationship" relationship="rootViewController" id="4dW-46-Zkj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rQY-eA-9gf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-471" y="151"/>
+        </scene>
+        <!--Настроить Сервер-->
+        <scene sceneID="pBT-iy-Q0Y">
+            <objects>
+                <viewController id="fcc-um-41r" customClass="ChangeHOST" customModule="QrScanner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bIB-MV-YHJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1A-j4-X6U">
+                                <rect key="frame" x="16" y="750" width="382" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Vai-Ld-7ud"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Сканировать QR">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="buttonTapped:" destination="fcc-um-41r" eventType="touchUpInside" id="8PI-zh-Yeg"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Host" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5j6-pJ-5yL">
+                                <rect key="frame" x="16" y="157" width="382" height="38.5"/>
+                                <color key="backgroundColor" white="0.95331101190476186" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Текущий HOST" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdM-kQ-7Fp">
+                                <rect key="frame" x="16" y="120" width="382" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="dkd-Fj-3rM"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dkd-Fj-3rM" firstAttribute="trailing" secondItem="5j6-pJ-5yL" secondAttribute="trailing" constant="16" id="5FR-dL-ffx"/>
+                            <constraint firstItem="5j6-pJ-5yL" firstAttribute="top" secondItem="qdM-kQ-7Fp" secondAttribute="bottom" constant="16" id="9GA-ed-lQa"/>
+                            <constraint firstItem="qdM-kQ-7Fp" firstAttribute="leading" secondItem="dkd-Fj-3rM" secondAttribute="leading" constant="16" id="FvI-0q-lsb"/>
+                            <constraint firstItem="Q1A-j4-X6U" firstAttribute="leading" secondItem="dkd-Fj-3rM" secondAttribute="leading" constant="16" id="aSt-YG-jjP"/>
+                            <constraint firstItem="dkd-Fj-3rM" firstAttribute="trailing" secondItem="qdM-kQ-7Fp" secondAttribute="trailing" constant="16" id="jEF-ws-fO5"/>
+                            <constraint firstItem="dkd-Fj-3rM" firstAttribute="bottom" secondItem="Q1A-j4-X6U" secondAttribute="bottom" constant="64" id="k5n-JT-z0x"/>
+                            <constraint firstItem="5j6-pJ-5yL" firstAttribute="leading" secondItem="dkd-Fj-3rM" secondAttribute="leading" constant="16" id="o9P-UW-bwi"/>
+                            <constraint firstItem="dkd-Fj-3rM" firstAttribute="trailing" secondItem="Q1A-j4-X6U" secondAttribute="trailing" constant="16" id="oPa-gx-lda"/>
+                            <constraint firstItem="qdM-kQ-7Fp" firstAttribute="top" secondItem="dkd-Fj-3rM" secondAttribute="top" constant="32" id="uAv-FH-BgO"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Настроить Сервер" id="rbT-N5-DnU"/>
+                    <connections>
+                        <outlet property="hostTextField" destination="5j6-pJ-5yL" id="oyw-wW-Rzu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l4S-Kg-1K9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="252" y="151"/>
+        </scene>
+        <!--QRScanner-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScannerViewController" id="BYZ-38-t0r" customClass="ScannerViewController" customModule="QrScanner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="edG-2K-WMn">
+                                <rect key="frame" x="32" y="76" width="350" height="578"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                            </view>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOu-IE-cpp">
+                                <rect key="frame" x="32" y="686" width="350" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="eyn-40-5UD"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Сканировать заново">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RnV-mb-o5s"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="AOu-IE-cpp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="0eU-Ia-EMY"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="AOu-IE-cpp" secondAttribute="bottom" constant="128" id="7BO-Uc-oIN"/>
+                            <constraint firstItem="AOu-IE-cpp" firstAttribute="top" secondItem="edG-2K-WMn" secondAttribute="bottom" constant="32" id="9s1-nM-Ifa"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="edG-2K-WMn" secondAttribute="trailing" constant="32" id="Jzd-5A-mkY"/>
+                            <constraint firstItem="edG-2K-WMn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="dvq-oB-Szb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="AOu-IE-cpp" secondAttribute="trailing" constant="32" id="lKN-CF-BGB"/>
+                            <constraint firstItem="edG-2K-WMn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="ul5-n4-Dyh"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="QRScanner" id="oKY-zz-XD6"/>
+                    <connections>
+                        <outlet property="buttonLabel" destination="AOu-IE-cpp" id="7SJ-A6-4zp"/>
+                        <outlet property="previewForCaptureQR" destination="edG-2K-WMn" id="kzV-U9-R1Z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="922" y="151"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
