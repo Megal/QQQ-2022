@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
-    res.sendStatus(200);
+var jsonParser = express.json();
+
+router.post('/', jsonParser, function(req, res, next) {
+    console.log(req.body['qrCode']);
+    res.json("ok");
 });
 
 module.exports = router;

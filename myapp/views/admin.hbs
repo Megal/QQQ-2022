@@ -1,0 +1,37 @@
+<div class="container">
+    <div>
+        <label for="group-select" class="form-label">Группа</label>
+        <select class="form-select" id="group-select">
+            <option value="1">КТбо2-7</option>
+            <option value="2">КТбо2-9</option>
+            <option value="3">КТбо2-10</option>
+        </select>
+    </div>
+
+    <hr class="mt-2 mb-2">
+
+    <div>
+        {{#each lessons}}
+            <div class = "border-2 rounded-2 p-3 bg-dark mb-3
+            {{#if this.isCurrent}}ms-3 me-3 bg-opacity-10{{else}} bg-opacity-25{{/if}}">
+                <div class = "d-flex flex-row justify-content-between">
+                    {{#if this.isCurrent}}<h2>Текущая лекция</h2>{{/if}}
+                    <div>
+                        <h3>{{this.Name}}</h3>
+                        <h4>{{this.tSurname}} {{this.tName}}</h4>
+                        {{isoToTime this.TimeStart}} - {{isoToTime this.TimeEnd}}
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-success">
+                        Загрузить посещаемость
+                    </button>
+                    <button class="btn btn-primary">
+                        Скачать посещаемость
+                    </button>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
+

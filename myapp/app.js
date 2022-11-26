@@ -23,11 +23,13 @@ global.connDB.connect(function(err) {
 });
 
 var indexRouter = require('./routes/index');
+var adminRouter = require('./routes/admin');
+
 var currentAjax = require('./ajax/current');
 var markAjax = require('./ajax/mark');
 var getQuestionsAjax = require('./ajax/getQuestions');
 var participateAjax = require('./ajax/participate');
-var getAnswerAjax = require('./ajax/getAnswer');
+var setAnswerAjax = require('./ajax/setAnswer');
 
 var app = express();
 
@@ -45,11 +47,12 @@ app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'));
 
 app.use('/', indexRouter);
+app.use('/admin', adminRouter);
 app.use('/current', currentAjax);
 app.use('/mark', markAjax);
 app.use('/getQuestions', getQuestionsAjax);
 app.use('/participate', participateAjax);
-app.use('/getAnswer', getAnswerAjax);
+app.use('/setAnswer', setAnswerAjax);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
