@@ -2,28 +2,72 @@
 #include <MFRC522.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
+#include <WiFiClient.h>
+#include <WiFiClientSecure.h>
+#include <SSD1306Wire.h> 
+#include <qrcode.h>
 
 #define SS_PIN D4
 #define RST_PIN D3
+
+SSD1306Wire display(0x3c, D2, D1, GEOMETRY_128_32);
+QRcode qrcode(&display);
+
 MFRC522 rfid(SS_PIN, RST_PIN); // Instance of the class
 MFRC522::MIFARE_Key key;
+
+HTTPClient http;
+WiFiClientSecure client;
+
+int i = 0, j = 0, httpCode;
+const char* ssid = "covid19";
+const char* password = "HuivamA2020";
+String host = "ч";
+String httpsFingerprint = "";
+String payload, sub_string;
+unsigned long lastTime = 0;
+unsigned long timerDelay = 5000;
+String uid = "";
 // Init array that will store new NUID
 byte nuidPICC[4];
+char str[32] = "";
 
 void setup() {
   Serial.begin(115200);
+
+    //initializing display
+    display.init();
+    display.clear();
+    display.display();
+
+    qrcode.init();
+    qrcode.create("https://eoug9vxr5aww76a.m.pipedream.net");
+
+  WiFi.begin(ssid, password);
   SPI.begin(); // Init SPI bus
   rfid.PCD_Init(); // Init MFRC522
+
   Serial.println();
   Serial.print(F("Reader :"));
+
   rfid.PCD_DumpVersionToSerial();
   for (byte i = 0; i < 6; i++) {
     key.keyByte[i] = 0xFF;
   }
+
   Serial.println();
   Serial.println(F("This code scan the MIFARE Classic NUID."));
   Serial.print(F("Using the following key:"));
   printHex(key.keyByte, MFRC522::MF_KEY_SIZE);
+
+  Serial.println("Connecting");
+  while(WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("");
+  Serial.print("Connected to WiFi network with IP Address: ");
+  Serial.println(WiFi.localIP());
 }
 
 void loop() {
@@ -50,8 +94,11 @@ void loop() {
     Serial.println(F("A new card has been detected."));
    // Store NUID into nuidPICC array
     for (byte i = 0; i < 4; i++) {
-     nuidPICC[i] = rfid.uid.uidByte[i];
+      nuidPICC[i] = rfid.uid.uidByte[i];
+      array_to_string(nuidPICC, 4, str);
+      uid = str;
     }
+    testPOST(uid);
     Serial.println(F("The NUID tag is:"));
     Serial.print(F("In hex: "));
     printHex(rfid.uid.uidByte, rfid.uid.size);
@@ -83,4 +130,71 @@ void printDec(byte *buffer, byte bufferSize) {
     Serial.print(buffer[i] < 0x10 ? " 0" : " ");
     Serial.print(buffer[i], DEC);
   }
+}
+
+void testPOST(String uid) {
+    if(WiFi.status()== WL_CONNECTED){
+      // Your Domain name with URL path or IP address with path
+      client.setInsecure();
+      http.begin(client, host);
+  
+      // If you need Node-RED/server authentication, insert user and password below
+      //http.setAuthorization("REPLACE_WITH_SERVER_USERNAME", "REPLACE_WITH_SERVER_PASSWORD");
+  
+      // Specify content-type header
+      http.addHeader("Content-Type", "application/json");         
+      // Send HTTP POST request
+      String httpRequestData = "{\"uid_key\":\"" + uid + "\"}"; 
+      int httpResponseCode = http.POST(httpRequestData);
+      
+      // If you need an HTTP request with a content type: application/json, use the following:
+      //http.addHeader("Content-Type", "application/json");
+      //int httpResponseCode = http.POST("{\"api_key\":\"tPmAT5Ab3j7F9\",\"sensor\":\"BME280\",\"value1\":\"24.25\",\"value2\":\"49.54\",\"value3\":\"1005.14\"}");
+
+      // If you need an HTTP request with a content type: text/plain
+      //http.addHeader("Content-Type", "text/plain");
+      //int httpResponseCode = http.POST("Hello, World!");
+     
+      Serial.print("HTTP Response code: ");
+      Serial.println(httpResponseCode);
+        
+      // Free resources
+      http.end();
+    }
+    else {
+      Serial.println("WiFi Disconnected");
+    }
+}
+
+// Функция поулчения свежего SSL отпечатка
+void getSSL_fp() {
+  if (WiFi.status() == WL_CONNECTED) {
+    i = 0;
+    httpCode = 0;
+    payload = "";
+    http.begin(client, "http://alexgyver.ru/get_SSL_fp.php");
+    httpCode = http.GET();
+    if (httpCode > 0) {
+      payload = http.getString();
+      Serial.println("SSL OK!");
+    } else {
+      Serial.println("SSL fail");
+    }
+    http.end();
+    httpsFingerprint = "";
+    if (payload.length() > 0) {
+      httpsFingerprint = payload;
+    }
+  }
+}
+
+void array_to_string(byte array[], unsigned int len, char buffer[]) {
+  for (unsigned int i = 0; i < len; i++)
+  {
+    byte nib1 = (array[i] >> 4) & 0x0F;
+    byte nib2 = (array[i] >> 0) & 0x0F;
+    buffer[i * 2 + 0] = nib1  < 0xA ? '0' + nib1  : 'A' + nib1  - 0xA;
+    buffer[i * 2 + 1] = nib2  < 0xA ? '0' + nib2  : 'A' + nib2  - 0xA;
+  }
+  buffer[len * 2] = '\0';
 }
