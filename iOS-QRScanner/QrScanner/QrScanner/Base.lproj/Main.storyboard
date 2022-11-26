@@ -20,27 +20,84 @@
                         <color key="barTintColor" red="0.1064393148" green="0.46032363180000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="St2-V9-YDk"/>
+                        <segue destination="fcc-um-41r" kind="relationship" relationship="rootViewController" id="4dW-46-Zkj"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rQY-eA-9gf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-471" y="151"/>
         </scene>
+        <!--Настроить Сервер-->
+        <scene sceneID="pBT-iy-Q0Y">
+            <objects>
+                <viewController id="fcc-um-41r" customClass="ChangeHOST" customModule="QrScanner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bIB-MV-YHJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1A-j4-X6U">
+                                <rect key="frame" x="16" y="323.5" width="382" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Vai-Ld-7ud"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                <connections>
+                                    <action selector="buttonTapped:" destination="fcc-um-41r" eventType="touchUpInside" id="8PI-zh-Yeg"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Host" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5j6-pJ-5yL">
+                                <rect key="frame" x="16" y="157" width="382" height="38.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Текущий HOST" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdM-kQ-7Fp">
+                                <rect key="frame" x="16" y="120" width="382" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="dkd-Fj-3rM"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dkd-Fj-3rM" firstAttribute="trailing" secondItem="5j6-pJ-5yL" secondAttribute="trailing" constant="16" id="5FR-dL-ffx"/>
+                            <constraint firstItem="5j6-pJ-5yL" firstAttribute="top" secondItem="qdM-kQ-7Fp" secondAttribute="bottom" constant="16" id="9GA-ed-lQa"/>
+                            <constraint firstItem="qdM-kQ-7Fp" firstAttribute="leading" secondItem="dkd-Fj-3rM" secondAttribute="leading" constant="16" id="FvI-0q-lsb"/>
+                            <constraint firstItem="Q1A-j4-X6U" firstAttribute="leading" secondItem="dkd-Fj-3rM" secondAttribute="leading" constant="16" id="aSt-YG-jjP"/>
+                            <constraint firstItem="dkd-Fj-3rM" firstAttribute="trailing" secondItem="qdM-kQ-7Fp" secondAttribute="trailing" constant="16" id="jEF-ws-fO5"/>
+                            <constraint firstItem="5j6-pJ-5yL" firstAttribute="leading" secondItem="dkd-Fj-3rM" secondAttribute="leading" constant="16" id="o9P-UW-bwi"/>
+                            <constraint firstItem="dkd-Fj-3rM" firstAttribute="trailing" secondItem="Q1A-j4-X6U" secondAttribute="trailing" constant="16" id="oPa-gx-lda"/>
+                            <constraint firstItem="Q1A-j4-X6U" firstAttribute="top" secondItem="5j6-pJ-5yL" secondAttribute="bottom" constant="128" id="qGh-SY-572"/>
+                            <constraint firstItem="qdM-kQ-7Fp" firstAttribute="top" secondItem="dkd-Fj-3rM" secondAttribute="top" constant="32" id="uAv-FH-BgO"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Настроить Сервер" id="rbT-N5-DnU"/>
+                    <connections>
+                        <outlet property="hostLabel" destination="qdM-kQ-7Fp" id="MSS-y6-WbC"/>
+                        <outlet property="hostTextField" destination="5j6-pJ-5yL" id="oyw-wW-Rzu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l4S-Kg-1K9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="252" y="151"/>
+        </scene>
         <!--QRScanner-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ScannerViewController" customModule="QrScanner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScannerViewController" id="BYZ-38-t0r" customClass="ScannerViewController" customModule="QrScanner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="edG-2K-WMn">
-                                <rect key="frame" x="32" y="120" width="350" height="537"/>
+                                <rect key="frame" x="32" y="76" width="350" height="578"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                             </view>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOu-IE-cpp">
-                                <rect key="frame" x="32" y="689" width="350" height="48"/>
+                                <rect key="frame" x="32" y="686" width="350" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="eyn-40-5UD"/>
                                 </constraints>
@@ -52,39 +109,28 @@
                                     <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RnV-mb-o5s"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FKP-Rs-gE9">
-                                <rect key="frame" x="32" y="769" width="350" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="AOu-IE-cpp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="0eU-Ia-EMY"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="FKP-Rs-gE9" secondAttribute="bottom" constant="72" id="8SX-5Q-guU"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="AOu-IE-cpp" secondAttribute="bottom" constant="128" id="7BO-Uc-oIN"/>
                             <constraint firstItem="AOu-IE-cpp" firstAttribute="top" secondItem="edG-2K-WMn" secondAttribute="bottom" constant="32" id="9s1-nM-Ifa"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="edG-2K-WMn" secondAttribute="trailing" constant="32" id="Jzd-5A-mkY"/>
-                            <constraint firstItem="FKP-Rs-gE9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YGD-OC-E1V"/>
-                            <constraint firstItem="FKP-Rs-gE9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="ZhU-am-Gz3"/>
                             <constraint firstItem="edG-2K-WMn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="dvq-oB-Szb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="AOu-IE-cpp" secondAttribute="trailing" constant="32" id="lKN-CF-BGB"/>
-                            <constraint firstItem="FKP-Rs-gE9" firstAttribute="top" secondItem="AOu-IE-cpp" secondAttribute="bottom" constant="32" id="mI5-Sx-oEf"/>
                             <constraint firstItem="edG-2K-WMn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="ul5-n4-Dyh"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FKP-Rs-gE9" secondAttribute="trailing" constant="32" id="yO3-nA-s3h"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="QRScanner" id="oKY-zz-XD6"/>
                     <connections>
                         <outlet property="buttonLabel" destination="AOu-IE-cpp" id="7SJ-A6-4zp"/>
                         <outlet property="previewForCaptureQR" destination="edG-2K-WMn" id="kzV-U9-R1Z"/>
-                        <outlet property="qrString" destination="FKP-Rs-gE9" id="S64-Qi-k9T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="309" y="151"/>
+            <point key="canvasLocation" x="922" y="151"/>
         </scene>
     </scenes>
     <resources>

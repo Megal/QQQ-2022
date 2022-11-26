@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ScannerViewController.swift
 //  QrScanner
 //
 //  Created by Alexey Borisov on 26.11.2022.
@@ -11,8 +11,8 @@ import UIKit
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
+    var host: String = "http://10.131.57.46:3000/mark"
     
-    @IBOutlet weak var qrString: UILabel!
     @IBOutlet weak var buttonLabel: UIButton!
     @IBOutlet weak var previewForCaptureQR: UIView!
     
@@ -24,9 +24,15 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(red: 0.106, green: 0.46, blue: 1, alpha: 1)
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
+        
         captureSession = AVCaptureSession()
 
-        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
+        guard let videoCaptureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front) else { return }
         let videoInput: AVCaptureDeviceInput
 
         do {
@@ -99,7 +105,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
 
     func found(code: String) {
-        qrString.text = code
+        sendQRData(qrData: code)
         buttonLabel.isHidden = false
         buttonLabel.titleLabel?.text = "Сканировать заново"
     }
@@ -110,6 +116,41 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
+    }
+}
+
+extension ScannerViewController {
+    func sendQRData(qrData: String) {
+        let url = URL(string: "http://\(host):3000/mark")!
+        var request = URLRequest(url: url)
+        
+        request.setValue(
+            "application/json",
+            forHTTPHeaderField: "Content-Type"
+        )
+        
+        let body = ["qrCode": qrData]
+        let bodyData = try? JSONSerialization.data(
+            withJSONObject: body,
+            options: []
+        )
+        
+        request.httpMethod = "POST"
+        request.httpBody = bodyData
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { (data, response, error) in
+
+            if let error = error {
+                // Handle HTTP request error
+            } else if let data = data {
+                // Handle HTTP request response
+            } else {
+                // Handle unexpected error
+            }
+        }
+        
+        task.resume()
     }
 }
 

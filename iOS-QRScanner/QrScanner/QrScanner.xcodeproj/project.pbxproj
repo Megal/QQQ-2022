@@ -9,21 +9,23 @@
 /* Begin PBXBuildFile section */
 		B44F39C4293218A500F3746B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44F39C3293218A500F3746B /* AppDelegate.swift */; };
 		B44F39C6293218A500F3746B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44F39C5293218A500F3746B /* SceneDelegate.swift */; };
-		B44F39C8293218A500F3746B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44F39C7293218A500F3746B /* ViewController.swift */; };
+		B44F39C8293218A500F3746B /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44F39C7293218A500F3746B /* ScannerViewController.swift */; };
 		B44F39CB293218A500F3746B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B44F39C9293218A500F3746B /* Main.storyboard */; };
 		B44F39CD293218A700F3746B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B44F39CC293218A700F3746B /* Assets.xcassets */; };
 		B44F39D0293218A700F3746B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B44F39CE293218A700F3746B /* LaunchScreen.storyboard */; };
+		B44F39DA29322DC100F3746B /* ChangeHOST.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44F39D929322DC100F3746B /* ChangeHOST.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B44F39C0293218A500F3746B /* QrScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QrScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B44F39C3293218A500F3746B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B44F39C5293218A500F3746B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B44F39C7293218A500F3746B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B44F39C7293218A500F3746B /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		B44F39CA293218A500F3746B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B44F39CC293218A700F3746B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B44F39CF293218A700F3746B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B44F39D1293218A700F3746B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B44F39D929322DC100F3746B /* ChangeHOST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHOST.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +60,8 @@
 			children = (
 				B44F39C3293218A500F3746B /* AppDelegate.swift */,
 				B44F39C5293218A500F3746B /* SceneDelegate.swift */,
-				B44F39C7293218A500F3746B /* ViewController.swift */,
+				B44F39C7293218A500F3746B /* ScannerViewController.swift */,
+				B44F39D929322DC100F3746B /* ChangeHOST.swift */,
 				B44F39C9293218A500F3746B /* Main.storyboard */,
 				B44F39CC293218A700F3746B /* Assets.xcassets */,
 				B44F39CE293218A700F3746B /* LaunchScreen.storyboard */,
@@ -138,9 +141,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B44F39C8293218A500F3746B /* ViewController.swift in Sources */,
+				B44F39C8293218A500F3746B /* ScannerViewController.swift in Sources */,
 				B44F39C4293218A500F3746B /* AppDelegate.swift in Sources */,
 				B44F39C6293218A500F3746B /* SceneDelegate.swift in Sources */,
+				B44F39DA29322DC100F3746B /* ChangeHOST.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
