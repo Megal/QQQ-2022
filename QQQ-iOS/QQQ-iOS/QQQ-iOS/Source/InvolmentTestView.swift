@@ -8,13 +8,21 @@
 import SwiftUI
 
 struct InvolmentTestView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+	var body: some View {
+		VStack {
+			Spacer()
+//			makePrismButton(text: "afsdafsd")
+			Text("\n\n\n")
+//			makePrismButton(text: "afsdafsd")
+			Spacer()
+		}
+	}
+
+
 }
 
 struct InvolmentTestView_Previews: PreviewProvider {
-    static var previews: some View {
-        InvolmentTestView()
-    }
+	static var previews: some View {
+		InvolmentTestView()
+	}
 }

@@ -11,7 +11,16 @@ import SwiftUI
 struct QQQ_iOSApp: App {
 	var body: some Scene {
 		WindowGroup {
-			RsvpView()
+			if #available(iOS 16.0, *) {
+				NavigationStack {
+					LoginView()
+				}
+			} else {
+				NavigationView {
+					LoginView()
+				}
+				.navigationViewStyle(StackNavigationViewStyle())
+			}
 		}
 	}
 }
