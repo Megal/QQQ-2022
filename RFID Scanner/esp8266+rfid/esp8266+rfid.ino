@@ -4,9 +4,14 @@
 #include <ESP8266HTTPClient.h>
 #include <WiFiClient.h>
 #include <WiFiClientSecure.h>
+#include <SSD1306Wire.h> 
+#include <qrcode.h>
 
 #define SS_PIN D4
 #define RST_PIN D3
+
+SSD1306Wire display(0x3c, D2, D1, GEOMETRY_128_32);
+QRcode qrcode(&display);
 
 MFRC522 rfid(SS_PIN, RST_PIN); // Instance of the class
 MFRC522::MIFARE_Key key;
@@ -17,7 +22,7 @@ WiFiClientSecure client;
 int i = 0, j = 0, httpCode;
 const char* ssid = "covid19";
 const char* password = "HuivamA2020";
-String host = "https://eoug9vxr5aww76a.m.pipedream.net";
+String host = "ч";
 String httpsFingerprint = "";
 String payload, sub_string;
 unsigned long lastTime = 0;
@@ -29,6 +34,14 @@ char str[32] = "";
 
 void setup() {
   Serial.begin(115200);
+
+    //initializing display
+    display.init();
+    display.clear();
+    display.display();
+
+    qrcode.init();
+    qrcode.create("https://eoug9vxr5aww76a.m.pipedream.net");
 
   WiFi.begin(ssid, password);
   SPI.begin(); // Init SPI bus
@@ -55,8 +68,6 @@ void setup() {
   Serial.println("");
   Serial.print("Connected to WiFi network with IP Address: ");
   Serial.println(WiFi.localIP());
- 
-  Serial.println("Timer set to 5 seconds (timerDelay variable), it will take 5 seconds before publishing the first reading.");
 }
 
 void loop() {
