@@ -58,8 +58,26 @@ struct API {
 		static func getQuestions() async throws -> [API.Response.Question] {
 			let requestUrl = makeRequestUrl(to: "getQuestions")!
 
-			let (data, _) = try await session.data(from: requestUrl)
+			let data: Data
+			if !mockEverything {
+				data = await MockWaiter.task(with: Response.Question.mock)
+			} else {
+				(data, _) = try await session.data(from: requestUrl)
+			}
 			return try Decoder.getQuestions(from: data)
+		}
+
+		static func getQrCode() async throws -> Response.QrCode {
+			let requestUrl = makeRequestUrl(to: "getQrCode")!
+
+			let data: Data
+			if !mockEverything {
+				data = await MockWaiter.task(with: Response.Question.mock)
+			} else {
+				(data, _) = try await session.data(from: requestUrl)
+			}
+			return try Decoder.getQrCode(from: data)
+
 		}
 	}
 
@@ -83,6 +101,14 @@ struct API {
 
 			let questions = try decoder.decode([API.Response.Question].self, from: data)
 			return questions
+		}
+
+		static func getQrCode(from data: Data) throws -> API.Response.QrCode {
+			let decoder = JSONDecoder()
+
+			let questions = try decoder.decode(API.Response.QrCode.self, from: data)
+			return questions
+
 		}
 
 	}
@@ -109,6 +135,14 @@ struct API {
 			var question: String?
 			var answers: [String]?
 			var correctAnswer: Int?
+		}
+
+		struct QrCode: Codable {
+			static var mock = """
+			{qrCode: "ABIRVALG"}
+			"""
+
+			var qrCode: String
 		}
 	}
 
