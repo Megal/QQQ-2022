@@ -67,6 +67,18 @@ struct API {
 			return try Decoder.getQuestions(from: data)
 		}
 
+		static func getCurrentQuestion() async throws -> API.Response.Question? {
+			let requestUrl = makeRequestUrl(to: "getQuestions")!
+
+			let data: Data
+			if !mockEverything {
+				data = await MockWaiter.task(with: Response.Question.currentMock)
+			} else {
+				(data, _) = try await session.data(from: requestUrl)
+			}
+			return try Decoder.getCurrentQuestion(from: data)
+		}
+
 		static func getQrCode() async throws -> Response.QrCode {
 			let requestUrl = makeRequestUrl(to: "getQrCode")!
 
@@ -77,7 +89,6 @@ struct API {
 				(data, _) = try await session.data(from: requestUrl)
 			}
 			return try Decoder.getQrCode(from: data)
-
 		}
 	}
 
@@ -108,7 +119,13 @@ struct API {
 
 			let questions = try decoder.decode(API.Response.QrCode.self, from: data)
 			return questions
+		}
 
+		static func getCurrentQuestion(from data: Data) throws -> API.Response.Question {
+			let decoder = JSONDecoder()
+
+			let question = try decoder.decode(API.Response.Question.self, from: data)
+			return question
 		}
 
 	}
@@ -130,6 +147,9 @@ struct API {
 		struct Question: Codable {
 			static var mock = """
 			[{"question":"Корень кубический из 49","answers":["7","5","14"],"correctAnswer":1},{"question":"Стоимость 98 сегодня","answers":["42","54","71"],"correctAnswer":2}]
+			"""
+			static var currentMock = """
+			{"question":"Корень кубический из 49","answers":["7","5","14"]}
 			"""
 
 			var question: String?

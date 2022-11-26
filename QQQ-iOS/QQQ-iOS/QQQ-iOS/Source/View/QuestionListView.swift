@@ -21,12 +21,8 @@ struct QuestionListViewModel {
 	}
 
 	var state = State.loaded
-	var lessonName = "Computer Science 101"
-	var start = ISO8601DateFormatter().date(from: "2022-11-27T15:00:00+03:00")
-	var end = ISO8601DateFormatter().date(from: "2022-11-27T16:30:00+03:00")
-	var professorName = "Читающий Нам Лекторович"
-	var groupName = "A-77"
-	var onlineUrl: URL? = URL(string: "https://google.com")
+	var question: String? = "Вопрос 1.\n\nКакой ответ?"
+	var options = ["Ответ 1", "Ответ 2", "Ответ 3"]
 	var response = ""
 
 	mutating func load() async {
@@ -34,13 +30,10 @@ struct QuestionListViewModel {
 		self.response = ""
 
 		do {
-			let current = try await API.Request.current()
+			let currentQuestion = try await API.Request.getCurrentQuestion()
 
-			self.lessonName = current.lessonName ?? "Лекция"
-			self.start = current.from
-			self.end = current.to
-			self.onlineUrl = URL(string: current.url ?? "")
-			self.professorName = current.professorName ?? ""
+			self.question = currentQuestion?.question
+			self.options = currentQuestion?.answers ?? []
 
 			self.state = .loaded
 		} catch {
@@ -50,7 +43,9 @@ struct QuestionListViewModel {
 		}
 	}
 
-	mutating func askQuestion() async {}
+	mutating func setAnswer(_ answerIndex: Int) {
+		
+	}
 }
 
 struct QuestionListView: View {
@@ -64,11 +59,22 @@ struct QuestionListView: View {
 //		.onTapGesture(perform: onAskButton)
 //	}
 
-
-
-
 	var body: some View {
-		Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+		VStack {
+			GroupBox {
+				Text(vm.question ?? "")
+				.frame(minWidth: 200.0)
+			}
+			ForEach(0..<vm.options.count) { optionIndex in
+				GroupBox {
+					Button(vm.options[optionIndex]) {
+						vm.setAnswer(optionIndex)
+					}
+					.frame(minWidth: 200.0)
+
+				}
+			}
+		}
 	}
 }
 
