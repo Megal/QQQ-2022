@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Prism
 
 struct ProfessorLessonViewModel {
 	enum State: String {
@@ -51,49 +50,27 @@ struct ProfessorLessonViewModel {
 	}
 
 	mutating func askQuestion() async {}
-	
 }
 
 struct ProfessorLessonView: View {
-	@State var prismConfiguration = PrismConfiguration(
-		tilt: 0.5,
-		size: CGSize(width: 240, height: 80),
-		extrusion: 20.0,
-		levitation: 0.0,
-		shadowColor: .black,
-		shadowOpacity: 0.15
-	)
-	@State private var opacity = 0.35
-	@State private var vm = ProfessorLessonViewModel()
+	@State var vm = ProfessorLessonViewModel()
 
+	@State private var prismViewBuilder = PrismViewBuilder()
 	private func makePrismView() -> some View {
-		let color = Color.accentColor
-
-		return PrismView(configuration: prismConfiguration) {
-				Text("Задать вопрос")
-				.frame(minWidth: 240.0)
-				.font(.title)
-				.frame(minHeight: 80.0)
-				.background(.ultraThinMaterial)
-				.background(color.opacity(opacity - 0.3))
-		} left: {
-			color.brightness(-0.1)
-				.opacity(opacity - 0.1)
-		} right: {
-			color.brightness(-0.3)
-				.opacity(opacity)
+		prismViewBuilder.makePrismView {
+			Text("Задать вопрос")
 		}
 		.onTapGesture(perform: onAskButton)
 	}
 
 	private func onAskButton() {
 		withAnimation {
-			prismConfiguration.extrusion = 0.0
+			prismViewBuilder.configuration.extrusion = 0.0
 		}
 
 		Task {
 			await vm.askQuestion()
-			prismConfiguration.extrusion = 20.0
+			prismViewBuilder.configuration.extrusion = 20.0
 		}
 	}
 

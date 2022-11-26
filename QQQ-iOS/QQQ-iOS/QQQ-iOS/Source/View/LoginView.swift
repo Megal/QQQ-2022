@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Prism
 
 struct LoginView: View {
 	enum Navigation: Hashable {
@@ -14,15 +13,7 @@ struct LoginView: View {
 		case professor
 	}
 
-	@State var prismConfiguration = PrismConfiguration(
-		tilt: 0.5,
-		size: CGSize(width: 240, height: 80),
-		extrusion: 20.0,
-		levitation: 0.0,
-		shadowColor: .black,
-		shadowOpacity: 0.15
-	)
-	@State private var opacity = 0.35
+	@State private var prismViewBuilder = PrismViewBuilder()
 
 	var body: some View {
 		if #available(iOS 16.0, *) {
@@ -65,23 +56,9 @@ struct LoginView: View {
 		let color = Color.accentColor
 
 		return NavigationLink(value: Navigation.professor) {
-			PrismView(configuration: prismConfiguration) {
+			prismViewBuilder.makePrismView {
 				Text(text)
-					.frame(minWidth: 240.0)
-					.font(.title2)
-					.frame(minHeight: 80.0)
-					.background(.ultraThinMaterial)
-					.background(color.opacity(opacity - 0.3))
-			} left: {
-				color.brightness(-0.1)
-					.opacity(opacity - 0.1)
-				//					.background(.thinMaterial)
-			} right: {
-				color.brightness(-0.3)
-					.opacity(opacity)
-				//					.background(.thinMaterial)
 			}
-//			.onTapGesture(perform: action ?? {})
 		}
 	}
 }

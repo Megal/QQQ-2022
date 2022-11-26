@@ -65,45 +65,24 @@ struct RsvpViewModel {
 }
 
 struct RsvpView: View {
-	@State var prismConfiguration = PrismConfiguration(
-		tilt: 0.5,
-		size: CGSize(width: 240, height: 80),
-		extrusion: 20.0,
-		levitation: 0.0,
-		shadowColor: .black,
-		shadowOpacity: 0.15
-	)
-	@State private var opacity = 0.35
 	@State private var vm = RsvpViewModel()
 
+	@State private var prismViewBuilder = PrismViewBuilder()
 	private func makePrismView() -> some View {
-		let color = Color.accentColor
-
-		return PrismView(configuration: prismConfiguration) {
-				Text("Я участвую")
-				.frame(minWidth: 240.0)
-				.font(.title)
-				.frame(minHeight: 80.0)
-				.background(.ultraThinMaterial)
-				.background(color.opacity(opacity - 0.3))
-		} left: {
-			color.brightness(-0.1)
-				.opacity(opacity - 0.1)
-		} right: {
-			color.brightness(-0.3)
-				.opacity(opacity)
+		prismViewBuilder.makePrismView {
+			Text("Я участвую")
 		}
 		.onTapGesture(perform: reactRsvpButton)
 	}
 
 	private func reactRsvpButton() {
 		withAnimation {
-			prismConfiguration.extrusion = 0.0
+			prismViewBuilder.configuration.extrusion = 0.0
 		}
 
 		Task {
 			await vm.participate()
-			prismConfiguration.extrusion = 20.0
+			prismViewBuilder.configuration.extrusion = 20.0
 		}
 	}
 
