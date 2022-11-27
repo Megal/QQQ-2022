@@ -9,7 +9,15 @@ router.post('/', jsonParser, function(req, res, next) {
         console.log(req.body['qrCode']);
         if(global.qrArray.has(req.body['qrCode'])) {
 
-            res.json('ok');
+            global.connDB.query(
+                'INSERT StudentPresence\n' +
+                `SET studentId=${global.qrArray.get(req.body['qrCode']).studentId},\n` +
+                `lessonId=${global.qrArray.get(req.body['qrCode']).lessonId}, presence=1;`,
+                function (error, results, fields) {
+                if (error) throw error;
+
+                res.json('ok');
+            });
         }
         else
             res.json('err');

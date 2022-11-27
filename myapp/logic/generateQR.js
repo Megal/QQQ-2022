@@ -4,10 +4,11 @@ const randomstring = require("randomstring");
 exports.func = function generateQRCodes ()
 {
     global.connDB.query(
-        'select Lesson.LessonID, S.StudentID FROM Lesson\n' +
-        'join GroupLessons GL on GL.LessonID = Lesson.LessonID\n' +
-        'join Student S on S.GroupID = GL.GroupID\n' +
-        `WHERE TimeStart <= \'${global.currTime}\' and TimeEnd >= \'${global.currTime}\';`,
+        'select Lesson.LessonId, S.StudentId FROM Lesson\n' +
+        'join GroupLessons GL on GL.lessonId = Lesson.lessonId\n' +
+        'join Student S on S.groupId = GL.groupId\n' +
+        `WHERE timeStart <= \'${global.currTime}\' and timeEnd >= \'${global.currTime}\'\n` +
+        'AND NOT EXISTS (SELECT * FROM StudentPresence WHERE studentId = S.studentId and lessonId = Lesson.lessonId);',
         function (error, results, fields) {
         if (error) throw error;
 
@@ -20,7 +21,7 @@ exports.func = function generateQRCodes ()
                 newStr = randomstring.generate(qrLen);
             }while(global.qrArray.has(newStr));
 
-            global.qrArray.set(newStr, {lessonID: lesson['LessonID'], studentID: lesson['StudentID']});
+            global.qrArray.set(newStr, {lessonId: lesson['LessonId'], studentId: lesson['StudentId']});
         });
 
         console.log(global.qrArray);
