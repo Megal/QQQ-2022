@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		241F4B80293286E200DCB4DC /* MockWaiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241F4B7F293286E200DCB4DC /* MockWaiter.swift */; };
+		2438901F29334A87005713F6 /* ApiDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2438901E29334A87005713F6 /* ApiDecoder.swift */; };
+		2438902129334AAC005713F6 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2438902029334AAC005713F6 /* ApiResponse.swift */; };
 		2447FAAE293227FC00F36441 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2447FAAD293227FB00F36441 /* LoginView.swift */; };
 		2447FAB02932648100F36441 /* ProfessorLessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2447FAAF2932648100F36441 /* ProfessorLessonView.swift */; };
 		2447FAB229326AD700F36441 /* QuestionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2447FAB129326AD700F36441 /* QuestionListView.swift */; };
@@ -24,6 +26,8 @@
 
 /* Begin PBXFileReference section */
 		241F4B7F293286E200DCB4DC /* MockWaiter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWaiter.swift; sourceTree = "<group>"; };
+		2438901E29334A87005713F6 /* ApiDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiDecoder.swift; sourceTree = "<group>"; };
+		2438902029334AAC005713F6 /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
 		2447FAAD293227FB00F36441 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2447FAAF2932648100F36441 /* ProfessorLessonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorLessonView.swift; sourceTree = "<group>"; };
 		2447FAB129326AD700F36441 /* QuestionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListView.swift; sourceTree = "<group>"; };
@@ -70,6 +74,8 @@
 			children = (
 				24E26E0C29312270004A2B17 /* SessionConfiguration.swift */,
 				24E26E0F29312C9C004A2B17 /* API.swift */,
+				2438901E29334A87005713F6 /* ApiDecoder.swift */,
+				2438902029334AAC005713F6 /* ApiResponse.swift */,
 				241F4B7F293286E200DCB4DC /* MockWaiter.swift */,
 			);
 			path = Network;
@@ -219,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2447FAB229326AD700F36441 /* QuestionListView.swift in Sources */,
+				2438901F29334A87005713F6 /* ApiDecoder.swift in Sources */,
 				2447FAAE293227FC00F36441 /* LoginView.swift in Sources */,
 				24E26E0B29312260004A2B17 /* InvolmentTestView.swift in Sources */,
 				247CA6872930DFFD007EA028 /* QQQ_iOSApp.swift in Sources */,
@@ -226,6 +233,7 @@
 				24E26E0D29312270004A2B17 /* SessionConfiguration.swift in Sources */,
 				2447FAB02932648100F36441 /* ProfessorLessonView.swift in Sources */,
 				2447FAB429326B3800F36441 /* PrismViewBuilder.swift in Sources */,
+				2438902129334AAC005713F6 /* ApiResponse.swift in Sources */,
 				24E26E1029312C9C004A2B17 /* API.swift in Sources */,
 				241F4B80293286E200DCB4DC /* MockWaiter.swift in Sources */,
 			);
