@@ -21,8 +21,14 @@ struct QuestionListViewModel {
 	}
 
 	var state = State.loaded
-	var question: String? = "Вопрос 1.\n\nКакой ответ?"
-	var options = ["Ответ 1", "Ответ 2", "Ответ 3"]
+	var question: String? = """
+	Англичанин живёт в красном доме. У испанца есть собака. В зелёном доме пьют кофе. Украинец пьёт чай. Зелёный дом стоит сразу справа от белого дома. Тот, кто курит Old Gold, разводит улиток. В жёлтом доме курят Kool. В центральном доме пьют молоко. Норвежец живёт в первом доме. Сосед того, кто курит Chesterfield, держит лису. В доме по соседству с тем, в котором держат лошадь, курят Kool. Тот, кто курит Lucky Strike, пьёт апельсиновый сок. Японец курит Parliament. Норвежец живёт рядом с синим домом. Кто пьёт воду? Кто держит зебру?
+	"""
+	var options = [
+		"Англичанин пьет воду, испанец держит зебру",
+		"Норвежец пьет воду, японец держит зебру",
+		"Японец пьет воду, испанец держит зебру"
+	]
 	var response = ""
 	var started = false
 
@@ -69,16 +75,22 @@ struct QuestionListView: View {
 		VStack {
 			GroupBox {
 				Text(vm.question ?? "")
-				.frame(minWidth: 200.0)
+				.frame(minWidth: 200.0, maxWidth: 360.0)
 			}
 			ForEach(0..<vm.options.count) { optionIndex in
 				GroupBox {
 					Button(vm.options[optionIndex]) {
-						Task {
-							await vm.setAnswer(optionIndex)
+						back()
+					}
+				}
+				.frame(minWidth: 300.0, maxWidth: 360.0)
+				.onTapGesture {
+					Task {
+						await vm.setAnswer(optionIndex)
+						if presentationMode.wrappedValue.isPresented {
+							presentationMode.wrappedValue.dismiss()
 						}
 					}
-					.frame(minWidth: 200.0)
 				}
 			}
 		}
@@ -89,9 +101,21 @@ struct QuestionListView: View {
 				}
 			}
 		}
-		.navigationTitle("Список вопросов")
+		.navigationTitle("Ответить на вопрос")
+	}
+
+	private func back() {
+		
+
 	}
 }
+
+extension QuestionListView {
+	enum Navigation {
+		case back
+	}
+}
+
 
 @available(iOS 16.0, *)
 struct QuestionListView_Previews: PreviewProvider {

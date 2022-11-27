@@ -11,6 +11,7 @@
 		2438901F29334A87005713F6 /* ApiDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2438901E29334A87005713F6 /* ApiDecoder.swift */; };
 		2438902129334AAC005713F6 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2438902029334AAC005713F6 /* ApiResponse.swift */; };
 		2438902329334E5B005713F6 /* QrCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2438902229334E5B005713F6 /* QrCodeView.swift */; };
+		2438902529335F1F005713F6 /* AskQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2438902429335F1F005713F6 /* AskQuestionView.swift */; };
 		2447FAAE293227FC00F36441 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2447FAAD293227FB00F36441 /* LoginView.swift */; };
 		2447FAB02932648100F36441 /* ProfessorLessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2447FAAF2932648100F36441 /* ProfessorLessonView.swift */; };
 		2447FAB229326AD700F36441 /* QuestionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2447FAB129326AD700F36441 /* QuestionListView.swift */; };
@@ -30,6 +31,7 @@
 		2438901E29334A87005713F6 /* ApiDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiDecoder.swift; sourceTree = "<group>"; };
 		2438902029334AAC005713F6 /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
 		2438902229334E5B005713F6 /* QrCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeView.swift; sourceTree = "<group>"; };
+		2438902429335F1F005713F6 /* AskQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskQuestionView.swift; sourceTree = "<group>"; };
 		2447FAAD293227FB00F36441 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2447FAAF2932648100F36441 /* ProfessorLessonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorLessonView.swift; sourceTree = "<group>"; };
 		2447FAB129326AD700F36441 /* QuestionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListView.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 			children = (
 				2447FAAF2932648100F36441 /* ProfessorLessonView.swift */,
 				2447FAB129326AD700F36441 /* QuestionListView.swift */,
+				2438902429335F1F005713F6 /* AskQuestionView.swift */,
 				2447FAAD293227FB00F36441 /* LoginView.swift */,
 				2438902229334E5B005713F6 /* QrCodeView.swift */,
 				24E26E0A29312260004A2B17 /* InvolmentTestView.swift */,
@@ -231,6 +234,7 @@
 				2438902329334E5B005713F6 /* QrCodeView.swift in Sources */,
 				2438901F29334A87005713F6 /* ApiDecoder.swift in Sources */,
 				2447FAAE293227FC00F36441 /* LoginView.swift in Sources */,
+				2438902529335F1F005713F6 /* AskQuestionView.swift in Sources */,
 				24E26E0B29312260004A2B17 /* InvolmentTestView.swift in Sources */,
 				247CA6872930DFFD007EA028 /* QQQ_iOSApp.swift in Sources */,
 				247CA69729311056007EA028 /* RsvpView.swift in Sources */,

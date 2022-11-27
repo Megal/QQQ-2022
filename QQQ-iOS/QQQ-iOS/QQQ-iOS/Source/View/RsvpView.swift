@@ -67,6 +67,7 @@ struct RsvpViewModel {
 extension RsvpView {
 	enum Navigation {
 		case qrCode
+		case answerQuestion
 	}
 }
 
@@ -166,6 +167,10 @@ struct RsvpView: View {
 				NavigationLink(value: Navigation.qrCode) {
 					makePrismView()
 				}
+				NavigationLink(value: Navigation.answerQuestion) {
+					Text("\nОтветить на вопрос").font(.title2)
+				}
+
 			} else {
 				ProgressView()
 			}
@@ -175,6 +180,8 @@ struct RsvpView: View {
 			switch destination {
 			case .qrCode:
 				QrCodeView()
+			case .answerQuestion:
+				QuestionListView()
 			}
 		}
 	}
