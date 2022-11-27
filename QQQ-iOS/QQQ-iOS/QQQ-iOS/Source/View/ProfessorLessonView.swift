@@ -52,6 +52,12 @@ struct ProfessorLessonViewModel {
 	mutating func askQuestion() async {}
 }
 
+extension ProfessorLessonView {
+	enum Navigation {
+		case setQuestion
+	}
+}
+
 struct ProfessorLessonView: View {
 	@State var vm = ProfessorLessonViewModel()
 
@@ -60,7 +66,7 @@ struct ProfessorLessonView: View {
 		prismViewBuilder.makePrismView {
 			Text("Задать вопрос")
 		}
-		.onTapGesture(perform: onAskButton)
+//		.onTapGesture(perform: onAskButton)
 	}
 
 	private func onAskButton() {
@@ -70,7 +76,13 @@ struct ProfessorLessonView: View {
 
 		Task {
 			await vm.askQuestion()
-			prismViewBuilder.configuration.extrusion = 20.0
+			if #available(iOS 16.0, *) {
+				try? await Task.sleep(for: .seconds(1))
+			}
+
+			withAnimation {
+				prismViewBuilder.configuration.extrusion = 20.0
+			}
 		}
 	}
 
@@ -144,7 +156,11 @@ struct ProfessorLessonView: View {
 			makeInfoSection()
 			Spacer()
 			if vm.state == .loaded {
-				makePrismView()
+				if #available(iOS 16.0, *) {
+					NavigationLink(value: Navigation.setQuestion) {
+						makePrismView()
+					}
+				}
 			} else {
 				ProgressView()
 			}
@@ -152,7 +168,8 @@ struct ProfessorLessonView: View {
 		}
 	}
 
-	var body: some View {
+	@ViewBuilder @MainActor
+	var stateView: some View {
 		switch vm.state {
 		case .firstLoad:
 			makeLoadingView()
@@ -165,11 +182,31 @@ struct ProfessorLessonView: View {
 			makeFailedView()
 		}
 	}
+
+	var body: AnyView {
+		guard #available(iOS 16.0, *) else {
+			return AnyView(Text("unavailable in iOS < 16.0"))
+		}
+
+		return AnyView(
+			stateView
+			.navigationTitle("Лекция")
+			.navigationDestination(for: Navigation.self) { destination in
+				switch destination {
+				case .setQuestion:
+					QuestionListView()
+				}
+			}
+		)
+	}
+
 }
 
 @available(iOS 16.0, *)
 struct ProfessorLessonView_Previews: PreviewProvider {
 	static var previews: some View {
-		ProfessorLessonView()
+		NavigationStack {
+			ProfessorLessonView()
+		}
 	}
 }

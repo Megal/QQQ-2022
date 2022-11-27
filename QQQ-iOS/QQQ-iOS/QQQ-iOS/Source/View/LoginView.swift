@@ -31,7 +31,7 @@ struct LoginView: View {
 		VStack {
 			Spacer()
 			Text("Войти как\n").font(.largeTitle)
-			NavigationLink(destination: RsvpView()) {
+			NavigationLink(value: Navigation.student) {
 				makePrismButton(text: "Cтудент")
 			}
 			Text("\n")
@@ -46,21 +46,18 @@ struct LoginView: View {
 			case .student:
 				RsvpView()
 			case .professor:
-				RsvpView()
+				ProfessorLessonView()
 			}
 		}
 	}
 
 	@available(iOS 16.0, *)
 	private func makePrismButton(text: String, action: (() -> Void)? = nil) -> some View {
-		let color = Color.accentColor
-
-		return NavigationLink(value: Navigation.professor) {
-			prismViewBuilder.makePrismView {
-				Text(text)
-			}
+		prismViewBuilder.makePrismView {
+			Text(text)
 		}
 	}
+
 }
 
 struct LoginView_Previews: PreviewProvider {
