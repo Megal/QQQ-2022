@@ -64,15 +64,22 @@ struct RsvpViewModel {
 
 }
 
+extension RsvpView {
+	enum Navigation {
+		case qrCode
+	}
+}
+
 struct RsvpView: View {
+
 	@State private var vm = RsvpViewModel()
 
 	@State private var prismViewBuilder = PrismViewBuilder()
 	private func makePrismView() -> some View {
 		prismViewBuilder.makePrismView {
-			Text("Я участвую")
+			Text("Подтвердить участие")
 		}
-		.onTapGesture(perform: reactRsvpButton)
+//		.onTapGesture(perform: reactRsvpButton)
 	}
 
 	private func reactRsvpButton() {
@@ -148,6 +155,7 @@ struct RsvpView: View {
 		}
 	}
 
+	@available(iOS 16.0, *)
 	private func makeLoadedView() -> some View {
 		VStack {
 			Spacer()
@@ -155,31 +163,54 @@ struct RsvpView: View {
 			makeInfoSection()
 			Spacer()
 			if vm.state == .loaded {
-				makePrismView()
+				NavigationLink(value: Navigation.qrCode) {
+					makePrismView()
+				}
 			} else {
 				ProgressView()
 			}
 			Spacer()
 		}
+		.navigationDestination(for: Navigation.self) { destination in
+			switch destination {
+			case .qrCode:
+				QrCodeView()
+			}
+		}
 	}
 
-	var body: some View {
+	@ViewBuilder @MainActor
+	var stateDefinedView: some View {
 		switch vm.state {
 		case .firstLoad:
 			makeLoadingView()
 				.onAppear { Task { await vm.load() } }
 		case .loaded:
-			makeLoadedView()
+			if #available(iOS 16.0, *) {
+				makeLoadedView()
+			} else {
+				Text("unavailable in iOS < 16.0")
+			}
 		case .failedToLoad:
 			makeFailedView()
 		case .waitingForResponse:
 			makeLoadingView()
 		}
 	}
+
+
+	var body: some View {
+		stateDefinedView
+			.navigationTitle("Текущая Лекция")
+	}
+
 }
 
+@available(iOS 16.0, *)
 struct RsvpView_Previews: PreviewProvider {
 	static var previews: some View {
-		RsvpView()
+		NavigationStack {
+			RsvpView()
+		}
 	}
 }
