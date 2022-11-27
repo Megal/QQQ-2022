@@ -31,12 +31,12 @@ struct LoginView: View {
 		VStack {
 			Spacer()
 			Text("Войти как\n").font(.largeTitle)
-			NavigationLink(value: Navigation.student) {
-				makePrismButton(text: "Cтудент")
-			}
-			Text("\n")
 			NavigationLink(value: Navigation.professor) {
 				makePrismButton(text: "Преподаватель")
+			}
+			Text("\n")
+			NavigationLink(value: Navigation.student) {
+				makePrismButton(text: "Cтудент")
 			}
 			Spacer()
 		}

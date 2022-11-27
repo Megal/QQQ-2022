@@ -105,8 +105,9 @@ struct QuestionListView: View {
 	}
 
 	private func back() {
-		
-
+		if presentationMode.wrappedValue.isPresented {
+			presentationMode.wrappedValue.dismiss()
+		}
 	}
 }
 

@@ -26,6 +26,7 @@ struct RsvpViewModel {
 	var end = ISO8601DateFormatter().date(from: "2022-11-27T16:30:00+03:00")
 	var professorName = "Читающий Нам Лекторович"
 	var onlineUrl: URL? = URL(string: "https://google.com")
+	var location: String? = "Зал учёного совета"
 	var response = ""
 
 	mutating func load() async {
@@ -106,7 +107,10 @@ struct RsvpView: View {
 	}
 
 	private func makeOnlineLink() -> AnyView {
-		if let onlineUrl = vm.onlineUrl {
+		if let location = vm.location {
+			return AnyView(erasing: Text(location))
+		}
+		else if let onlineUrl = vm.onlineUrl {
 			return AnyView(erasing: Link("Онлайн", destination: onlineUrl))
 		} else {
 			return AnyView(erasing: Text("Аудитория"))

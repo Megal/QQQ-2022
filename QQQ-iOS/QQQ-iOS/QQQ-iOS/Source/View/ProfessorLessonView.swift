@@ -24,8 +24,9 @@ struct ProfessorLessonViewModel {
 	var start = ISO8601DateFormatter().date(from: "2022-11-27T15:00:00+03:00")
 	var end = ISO8601DateFormatter().date(from: "2022-11-27T16:30:00+03:00")
 	var professorName = "Читающий Нам Лекторович"
-	var groupName = "A-77"
+	var groupName = ["КТбо2-7"]
 	var onlineUrl: URL? = URL(string: "https://google.com")
+	var location: String? = "Зал учёного совета"
 	var response = ""
 
 	mutating func load() async {
@@ -54,7 +55,7 @@ struct ProfessorLessonViewModel {
 
 extension ProfessorLessonView {
 	enum Navigation {
-		case setQuestion
+		case askQuesion
 	}
 }
 
@@ -98,7 +99,10 @@ struct ProfessorLessonView: View {
 	}
 
 	private func makeOnlineLink() -> AnyView {
-		if let onlineUrl = vm.onlineUrl {
+		if let location = vm.location {
+			return AnyView(erasing: Text(location))
+		}
+		else if let onlineUrl = vm.onlineUrl {
 			return AnyView(erasing: Link("Онлайн", destination: onlineUrl))
 		} else {
 			return AnyView(erasing: Text("Аудитория"))
@@ -111,8 +115,8 @@ struct ProfessorLessonView: View {
 			Text(vm.lessonName).font(.title)
 			Text(makeTimeTitleString()).font(.subheadline)
 			Text("")
-			Text("Группа")
-			Text(vm.professorName).font(.title2)
+			Text("Группы")
+			Text(vm.groupName.joined(separator: ", ")).font(.title2)
 			Text("")
 			Text("Где проходит").font(.title2)
 			makeOnlineLink()
@@ -157,7 +161,7 @@ struct ProfessorLessonView: View {
 			Spacer()
 			if vm.state == .loaded {
 				if #available(iOS 16.0, *) {
-					NavigationLink(value: Navigation.setQuestion) {
+					NavigationLink(value: Navigation.askQuesion) {
 						makePrismView()
 					}
 				}
@@ -193,8 +197,8 @@ struct ProfessorLessonView: View {
 			.navigationTitle("Лекция")
 			.navigationDestination(for: Navigation.self) { destination in
 				switch destination {
-				case .setQuestion:
-					QuestionListView()
+				case .askQuesion:
+					AskQuestionView()
 				}
 			}
 		)

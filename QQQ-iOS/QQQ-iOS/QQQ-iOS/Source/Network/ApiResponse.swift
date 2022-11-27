@@ -13,7 +13,7 @@ extension API {
 		/// {"lessonName":"Compuhter science","professorName":"Иванов И. О.","from":"2022-12-29T05:00:00.000Z","to":"2022-12-29T06:50:00.000Z","url":"https://yandex.ru"}
 		struct Current: Codable {
 			static var testData = """
-			{"lessonName":"Compuhter science","from":"2022-12-29T05:00:00.000Z","to":"2022-12-29T06:50:00.000Z","url":"https://yandex.ru"}
+			{"lessonName":"Презентация проектов","from":"2022-12-29T05:00:00.000Z","to":"2022-12-29T06:50:00.000Z","url":"https://yandex.ru", "professorName":"Читающий Нам Лекторович"}
 			"""
 			var lessonName: String?
 			var from: Date?
